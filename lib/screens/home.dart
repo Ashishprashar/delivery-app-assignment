@@ -1,8 +1,13 @@
+import 'package:delivery_app/contrants/colors.dart';
 import 'package:delivery_app/main.dart';
 import 'package:delivery_app/utils/buttons.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../widgets/notification_widget.dart';
+import '../widgets/square_box.dart';
+import '../widgets/task_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -229,10 +234,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       CircleAvatar(
-                          backgroundColor: Colors.blue.withOpacity(.1),
+                          backgroundColor: kBlueColor.withOpacity(.1),
                           child: const Icon(
                             Icons.call,
-                            color: Colors.blue,
+                            color: kBlueColor,
                           ))
                     ],
                   ),
@@ -245,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       CustomSubmitButton(
                         width: size.width * .35,
-                        color: Colors.green,
+                        color: kGreenColor,
                         text: "Accept",
                       ),
                       CustomSubmitButton(
@@ -313,13 +318,13 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'Order Recieved',
             ),
             const NotificationWidget(
-              color: Colors.blue,
+              color: kBlueColor,
               icon: Icons.pin_drop,
               subTitle: "You have reached the delivery location ...",
               title: 'Reached Location',
             ),
             const NotificationWidget(
-              color: Colors.green,
+              color: kGreenColor,
               icon: Icons.check_box_rounded,
               subTitle: "The order has been deliverd to ...",
               title: 'Order Delivered',
@@ -382,265 +387,6 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       )),
-    );
-  }
-}
-
-class NotificationWidget extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String subTitle;
-  final Color color;
-
-  const NotificationWidget({
-    Key? key,
-    required this.icon,
-    required this.title,
-    required this.subTitle,
-    required this.color,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
-      padding: const EdgeInsets.all(4),
-      height: 60,
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: Theme.of(context).highlightColor.withOpacity(.5)),
-          borderRadius: BorderRadius.circular(10)),
-      child: Column(children: [
-        Row(
-          children: [
-            Icon(icon, color: color),
-            const SizedBox(
-              width: 4,
-            ),
-            Expanded(
-              child: Container(
-                  // margin: const EdgeInsets.only(top: 20),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6!
-                        .copyWith(fontSize: 16, color: color),
-                  )),
-            ),
-            CircleAvatar(
-              radius: 12,
-              child: Text(
-                "1",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6!
-                    .copyWith(color: Colors.blue),
-              ),
-              backgroundColor: Colors.blue.withOpacity(.2),
-            )
-          ],
-        ),
-        Container(
-            margin: const EdgeInsets.only(left: 30),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              subTitle,
-              style: Theme.of(context).textTheme.bodySmall,
-            )),
-      ]),
-    );
-  }
-}
-
-class TaskWidget extends StatelessWidget {
-  final int orderNumber;
-  const TaskWidget({
-    Key? key,
-    required this.orderNumber,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
-        padding: const EdgeInsets.all(15),
-        height: size.height * .2,
-        decoration: BoxDecoration(
-            color: Theme.of(context).highlightColor.withOpacity(.2),
-            border: Border.all(
-                color: Theme.of(context).highlightColor.withOpacity(.5)),
-            borderRadius: BorderRadius.circular(20)),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 7,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        DateFormat("dd-MM-yyyy EEEE").format(DateTime.now()),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        "Order $orderNumber",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(color: Colors.blue),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(Icons.pin_drop),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text.rich(TextSpan(children: [
-                                  TextSpan(
-                                    text: "Banglore ",
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                  TextSpan(
-                                    text: "560064",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(fontWeight: FontWeight.bold),
-                                  ),
-                                ])),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                    "3891 Ranchview Dr.\nRichardson,California 62639",
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall)
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 120,
-                  child: Row(
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Start",
-                              style: Theme.of(context).textTheme.bodyLarge),
-                          Text.rich(TextSpan(children: [
-                            TextSpan(
-                              text: "10",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                      fontSize: 20,
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold),
-                            ),
-                            TextSpan(
-                              text: "km",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(
-                                      // fontSize: 20,
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold),
-                            ),
-                          ])),
-                          Text.rich(TextSpan(children: [
-                            TextSpan(
-                              text: "30",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                      fontSize: 20,
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold),
-                            ),
-                            TextSpan(
-                              text: "min",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(
-                                      // fontSize: 20,
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold),
-                            ),
-                          ])),
-                          Text("End",
-                              style: Theme.of(context).textTheme.bodyLarge)
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          const SquareBox(),
-                          Container(
-                            height: 90,
-                            child: DottedLine(
-                              direction: Axis.vertical,
-                            ),
-                          ),
-                          const SquareBox(),
-                        ],
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-            Container(
-              height: 4,
-              width: 50,
-              margin: const EdgeInsets.only(top: 4),
-              decoration: BoxDecoration(
-                  color: Theme.of(context).highlightColor,
-                  borderRadius: BorderRadius.circular(2)),
-            )
-          ],
-        ));
-  }
-}
-
-class SquareBox extends StatelessWidget {
-  const SquareBox({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 15,
-      width: 15,
-      decoration: BoxDecoration(
-          border: Border.all(
-        color: Colors.black,
-      )),
-      child: Center(
-        child: Container(
-          height: 8,
-          width: 8,
-          color: Colors.black,
-        ),
-      ),
     );
   }
 }
