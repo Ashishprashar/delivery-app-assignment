@@ -1,3 +1,4 @@
+import 'package:delivery_app/main.dart';
 import 'package:delivery_app/widgets/square_box.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,11 @@ class TaskWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size;
+    // var size;
     return Container(
         margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
         padding: const EdgeInsets.all(15),
-        height: size.height * .2,
+        height: size.height * .23,
         decoration: BoxDecoration(
             color: Theme.of(context).highlightColor.withOpacity(.2),
             border: Border.all(
@@ -143,15 +144,15 @@ class TaskWidget extends StatelessWidget {
                         ],
                       ),
                       Column(
-                        children: [
-                          const SquareBox(),
-                          Container(
+                        children: const [
+                          SquareBox(),
+                          SizedBox(
                             height: 90,
                             child: DottedLine(
                               direction: Axis.vertical,
                             ),
                           ),
-                          const SquareBox(),
+                          SquareBox(),
                         ],
                       )
                     ],
